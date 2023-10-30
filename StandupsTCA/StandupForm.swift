@@ -22,7 +22,8 @@ struct StandupFormFeature: Reducer {
             self.focus = focus
             self.standup = standup
             if self.standup.attendees.isEmpty {
-                self.standup.attendees.append(Attendee(id: UUID()))
+                @Dependency(\.uuid) var uuid
+                self.standup.attendees.append(Attendee(id: uuid()))
             }
         }
     }
@@ -134,14 +135,14 @@ struct ThemePicker: View {
   }
 }
 
-#Preview {
-  MainActor.assumeIsolated {
-    NavigationStack {
-      StandupFormView(
-        store: Store(initialState: StandupFormFeature.State(standup: .mock)) {
-            StandupFormFeature()
-        }
-      )
-    }
-  }
-}
+//#Preview {
+//  MainActor.assumeIsolated {
+//    NavigationStack {
+//      StandupFormView(
+//        store: Store(initialState: StandupFormFeature.State(standup: .mock)) {
+//            StandupFormFeature()
+//        }
+//      )
+//    }
+//  }
+//}

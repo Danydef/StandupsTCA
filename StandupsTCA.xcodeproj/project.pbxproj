@@ -13,10 +13,10 @@
 		654A03ED2AD9AE980053C415 /* StandupForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654A03EC2AD9AE980053C415 /* StandupForm.swift */; };
 		654A03EF2ADAFEF20053C415 /* StandupFormTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654A03EE2ADAFEF20053C415 /* StandupFormTests.swift */; };
 		654A03F12ADB03D50053C415 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 654A03F02ADB03D50053C415 /* README.md */; };
+		65A5B63C2AEED2240064DBE1 /* StandupsListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A5B63B2AEED2240064DBE1 /* StandupsListTests.swift */; };
 		65D7ACA22AD9A4A400B2AC9D /* StandupsTCAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D7ACA12AD9A4A400B2AC9D /* StandupsTCAApp.swift */; };
 		65D7ACA62AD9A4A500B2AC9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D7ACA52AD9A4A500B2AC9D /* Assets.xcassets */; };
 		65D7ACA92AD9A4A500B2AC9D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D7ACA82AD9A4A500B2AC9D /* Preview Assets.xcassets */; };
-		65D7ACB32AD9A4A500B2AC9D /* StandupsTCATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D7ACB22AD9A4A500B2AC9D /* StandupsTCATests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,12 +35,12 @@
 		654A03EC2AD9AE980053C415 /* StandupForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupForm.swift; sourceTree = "<group>"; };
 		654A03EE2ADAFEF20053C415 /* StandupFormTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupFormTests.swift; sourceTree = "<group>"; };
 		654A03F02ADB03D50053C415 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		65A5B63B2AEED2240064DBE1 /* StandupsListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupsListTests.swift; sourceTree = "<group>"; };
 		65D7AC9E2AD9A4A400B2AC9D /* StandupsTCA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StandupsTCA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D7ACA12AD9A4A400B2AC9D /* StandupsTCAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupsTCAApp.swift; sourceTree = "<group>"; };
 		65D7ACA52AD9A4A500B2AC9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		65D7ACA82AD9A4A500B2AC9D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		65D7ACAE2AD9A4A500B2AC9D /* StandupsTCATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StandupsTCATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		65D7ACB22AD9A4A500B2AC9D /* StandupsTCATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupsTCATests.swift; sourceTree = "<group>"; };
 		65D7ACCB2AD9A4CD00B2AC9D /* StandupsTCA.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = StandupsTCA.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,8 +107,8 @@
 		65D7ACB12AD9A4A500B2AC9D /* StandupsTCATests */ = {
 			isa = PBXGroup;
 			children = (
-				65D7ACB22AD9A4A500B2AC9D /* StandupsTCATests.swift */,
 				654A03EE2ADAFEF20053C415 /* StandupFormTests.swift */,
+				65A5B63B2AEED2240064DBE1 /* StandupsListTests.swift */,
 			);
 			path = StandupsTCATests;
 			sourceTree = "<group>";
@@ -231,8 +231,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65D7ACB32AD9A4A500B2AC9D /* StandupsTCATests.swift in Sources */,
 				654A03EF2ADAFEF20053C415 /* StandupFormTests.swift in Sources */,
+				65A5B63C2AEED2240064DBE1 /* StandupsListTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,7 +374,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"StandupsTCA/Preview Content\"";
-				DEVELOPMENT_TEAM = KK2BNA9VGL;
+				DEVELOPMENT_TEAM = 32W6MR4P46;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -382,12 +382,13 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.danydev.StandupsTCA;
+				PRODUCT_BUNDLE_IDENTIFIER = com.danydev.StandupsTCA2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_STRICT_CONCURRENCY = complete;
@@ -404,7 +405,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"StandupsTCA/Preview Content\"";
-				DEVELOPMENT_TEAM = KK2BNA9VGL;
+				DEVELOPMENT_TEAM = 32W6MR4P46;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -412,12 +413,13 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.danydev.StandupsTCA;
+				PRODUCT_BUNDLE_IDENTIFIER = com.danydev.StandupsTCA2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_STRICT_CONCURRENCY = complete;
@@ -433,9 +435,9 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KK2BNA9VGL;
+				DEVELOPMENT_TEAM = 32W6MR4P46;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.danydev.StandupsTCATests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -453,9 +455,9 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KK2BNA9VGL;
+				DEVELOPMENT_TEAM = 32W6MR4P46;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.danydev.StandupsTCATests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

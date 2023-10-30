@@ -9,25 +9,45 @@ import ComposableArchitecture
 import SwiftUI
 
 struct StandupsListFeature: Reducer {
-    struct State {
+    struct State: Equatable {
+        @PresentationState var addStandup: StandupFormFeature.State?
         var standups: IdentifiedArrayOf<Standup> = []
     }
     enum Action {
         case addButtonTapped
+        case addStandup(PresentationAction<StandupFormFeature.Action>)
+        case cancelStandupButtonTapped
+        case saveStandudButtonTapped
     }
     
+    @Dependency(\.uuid) var uuid
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
             case .addButtonTapped:
-                state.standups.append(
-                    Standup(
-                        id: UUID(),
-                        theme: .allCases.randomElement()!
-                    )
-                )
+                state.addStandup = StandupFormFeature.State(standup: Standup(id: uuid()))
+                return .none
+//            case let .addStandup(.presented(.addAttendeeButtonTapped))):
+//                Do something
+//                return .none
+            
+            case .addStandup:
+                return .none
+                
+            case .cancelStandupButtonTapped:
+                state.addStandup = nil
+                return .none
+                
+            case .saveStandudButtonTapped:
+                guard let standud = state.addStandup?.standup else { return .none }
+                state.standups.append(standud)
+                state.addStandup = nil
                 return .none
             }
+            
+        }
+        .ifLet(\.$addStandup, action: /Action.addStandup) {
+            StandupFormFeature()
         }
     }
 }
@@ -51,7 +71,31 @@ struct StandupsListView: View {
                     }
                 }
             }
+            .sheet(
+                store: store.scope(
+                    state: \.$addStandup,
+                    action: { .addStandup($0) }
+                )
+            ) { store in
+                NavigationStack {
+                    StandupFormView(store: store)
+                        .navigationTitle("NewStandup")
+                        .toolbar {
+                            ToolbarItem {
+                                Button("Save") {
+                                    viewStore.send(.saveStandudButtonTapped)
+                                }
+                            }
+                            ToolbarItem(placement: .cancellationAction) {
+                                Button("Cancel") {
+                                    viewStore.send(.cancelStandupButtonTapped)
+                                }
+                            }
+                        }
+                }
+            }
         }
+
     }
     
 }
@@ -99,6 +143,7 @@ extension LabelStyle where Self == TrailingIconLabelStyle {
                 )
             ) {
                     StandupsListFeature()
+                    ._printChanges()
             }
         )
     }
