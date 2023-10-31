@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4CCE59722AF19AE10094A85C /* StandupDetailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE59712AF19AE10094A85C /* StandupDetailTests.swift */; };
+		4CE483862AF020430078C342 /* StandupDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE483852AF020430078C342 /* StandupDetail.swift */; };
 		654A03E72AD9A71F0053C415 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 654A03E62AD9A71F0053C415 /* ComposableArchitecture */; };
 		654A03E92AD9A7800053C415 /* StandupsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654A03E82AD9A7800053C415 /* StandupsList.swift */; };
 		654A03EB2AD9A8B20053C415 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654A03EA2AD9A8B20053C415 /* Models.swift */; };
@@ -30,6 +32,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4CCE59712AF19AE10094A85C /* StandupDetailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupDetailTests.swift; sourceTree = "<group>"; };
+		4CE483852AF020430078C342 /* StandupDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupDetail.swift; sourceTree = "<group>"; };
 		654A03E82AD9A7800053C415 /* StandupsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupsList.swift; sourceTree = "<group>"; };
 		654A03EA2AD9A8B20053C415 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		654A03EC2AD9AE980053C415 /* StandupForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupForm.swift; sourceTree = "<group>"; };
@@ -92,6 +96,7 @@
 				654A03EA2AD9A8B20053C415 /* Models.swift */,
 				65D7ACA52AD9A4A500B2AC9D /* Assets.xcassets */,
 				65D7ACA72AD9A4A500B2AC9D /* Preview Content */,
+				4CE483852AF020430078C342 /* StandupDetail.swift */,
 			);
 			path = StandupsTCA;
 			sourceTree = "<group>";
@@ -107,6 +112,7 @@
 		65D7ACB12AD9A4A500B2AC9D /* StandupsTCATests */ = {
 			isa = PBXGroup;
 			children = (
+				4CCE59712AF19AE10094A85C /* StandupDetailTests.swift */,
 				654A03EE2ADAFEF20053C415 /* StandupFormTests.swift */,
 				65A5B63B2AEED2240064DBE1 /* StandupsListTests.swift */,
 			);
@@ -224,6 +230,7 @@
 				654A03E92AD9A7800053C415 /* StandupsList.swift in Sources */,
 				65D7ACA22AD9A4A400B2AC9D /* StandupsTCAApp.swift in Sources */,
 				654A03ED2AD9AE980053C415 /* StandupForm.swift in Sources */,
+				4CE483862AF020430078C342 /* StandupDetail.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,6 +240,7 @@
 			files = (
 				654A03EF2ADAFEF20053C415 /* StandupFormTests.swift in Sources */,
 				65A5B63C2AEED2240064DBE1 /* StandupsListTests.swift in Sources */,
+				4CCE59722AF19AE10094A85C /* StandupDetailTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

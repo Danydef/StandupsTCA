@@ -4,3 +4,5 @@
 
 * Segundo commit añadimos la conexión entre el dominio primario y el secundario.
 
+* Tercer commit añadimos la pantalla de detalle del Standup, donde podemos includo editarlo, se ha realizado algún tests no exaustivo, pero podemos mejorarlo, para la proxima navegaremos desde la pantalla principal hasta el detalle.
+
