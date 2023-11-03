@@ -12,15 +12,18 @@ import SwiftUI
 struct StandupsTCAApp: App {
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
-                StandupsListView(
-                    store: Store(
-                        initialState: StandupsListFeature.State()
-                    ) {
-                        StandupsListFeature()
-                    }
-                )
-            }
+            AppView(
+                store: Store(
+                    initialState: AppFeature.State(
+                        standupsList: StandupsListFeature.State(
+                            standups: [.mock]
+                        )
+                    )
+                ) {
+                    AppFeature()
+                        ._printChanges()
+                }
+            )
         }
     }
 }

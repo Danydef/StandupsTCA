@@ -10,35 +10,70 @@ import SwiftUI
 
 struct StandupDetailFeature: Reducer {
     struct State: Equatable {
+        @PresentationState var alert: AlertState<Action.Alert>?
         @PresentationState var editStandup: StandupFormFeature.State?
         var standup: Standup
     }
     
-    enum Action {
+    enum Action: Equatable {
+        case alert(PresentationAction<Alert>)
+        case delegate(Delegate)
         case deleteButtonTapped
         case deleteMeetings(atOffsets: IndexSet)
         case editButtonTapped
         case editStandup(PresentationAction<StandupFormFeature.Action>)
         case cancelEditStandupButtonTapped
         case saveStandupButtonTapped
+        
+        enum Alert {
+            case confirmDeletion
+        }
+        
+        enum Delegate: Equatable {
+            case sandupUpdated(Standup)
+        }
     }
     
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
-            case .deleteButtonTapped:
+            case .alert(.presented(.confirmDeletion)):
+                // TODO: Delete this standup
                 return .none
+                
+            case .alert(.dismiss):
+                return .none
+                
+            case .deleteButtonTapped:
+                state.alert = AlertState {
+                    TextState("Are you sure you want to delete this standup?")
+                } actions: {
+                    ButtonState(
+                        role: .destructive, action: .confirmDeletion
+                    ) {
+                        TextState("Delete")
+                    }
+                }
+                return .none
+                
+            case .delegate:
+                return .none
+                
             case let .deleteMeetings(atOffsets: indices):
                 state.standup.meetings.remove(atOffsets: indices)
                 return .none
+                
             case .editButtonTapped:
                 state.editStandup = StandupFormFeature.State(standup: state.standup)
                 return .none
+                
             case .editStandup:
                 return .none
+                
             case .cancelEditStandupButtonTapped:
                 state.editStandup = nil
                 return .none
+                
             case .saveStandupButtonTapped:
                 guard let standup = state.editStandup?.standup else {
                     return .none
@@ -48,8 +83,14 @@ struct StandupDetailFeature: Reducer {
                 return .none
             }
         }
+        .ifLet(\.$alert, action: /Action.alert)
         .ifLet(\.$editStandup, action: /Action.editStandup) {
             StandupFormFeature()
+        }
+        .onChange(of: \.standup) { _, newValue in
+            Reduce { _, _ in
+                .send(.delegate(.sandupUpdated(newValue)))
+            }
         }
     }
 }
@@ -131,6 +172,12 @@ struct StandupDetailView: View {
                     viewStore.send(.editButtonTapped)
                 }
             }
+            .alert(
+                store: store.scope(
+                    state: \.$alert,
+                    action: { .alert($0) }
+                )
+            )
             .sheet(
                 store: store.scope(
                     state: \.$editStandup,
@@ -167,6 +214,7 @@ struct StandupDetailView: View {
                 )
             ) {
                 StandupDetailFeature()
+                    ._printChanges()
             }
         )
     }

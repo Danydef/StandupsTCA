@@ -9,6 +9,15 @@
     }
   ],
   "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:StandupsTCA.xcodeproj",
+          "identifier" : "65D7AC9D2AD9A4A400B2AC9D",
+          "name" : "StandupsTCA"
+        }
+      ]
+    },
     "targetForVariableExpansion" : {
       "containerPath" : "container:StandupsTCA.xcodeproj",
       "identifier" : "65D7AC9D2AD9A4A400B2AC9D",

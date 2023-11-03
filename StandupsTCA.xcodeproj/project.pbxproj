@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C9B361C2AF3F6C0003FEE75 /* AppTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B361B2AF3F6C0003FEE75 /* AppTest.swift */; };
 		4CCE59722AF19AE10094A85C /* StandupDetailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE59712AF19AE10094A85C /* StandupDetailTests.swift */; };
 		4CE483862AF020430078C342 /* StandupDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE483852AF020430078C342 /* StandupDetail.swift */; };
 		654A03E72AD9A71F0053C415 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 654A03E62AD9A71F0053C415 /* ComposableArchitecture */; };
@@ -15,6 +16,7 @@
 		654A03ED2AD9AE980053C415 /* StandupForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654A03EC2AD9AE980053C415 /* StandupForm.swift */; };
 		654A03EF2ADAFEF20053C415 /* StandupFormTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654A03EE2ADAFEF20053C415 /* StandupFormTests.swift */; };
 		654A03F12ADB03D50053C415 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 654A03F02ADB03D50053C415 /* README.md */; };
+		656445DB2AF1A5380072CF7C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656445DA2AF1A5380072CF7C /* App.swift */; };
 		65A5B63C2AEED2240064DBE1 /* StandupsListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A5B63B2AEED2240064DBE1 /* StandupsListTests.swift */; };
 		65D7ACA22AD9A4A400B2AC9D /* StandupsTCAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D7ACA12AD9A4A400B2AC9D /* StandupsTCAApp.swift */; };
 		65D7ACA62AD9A4A500B2AC9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D7ACA52AD9A4A500B2AC9D /* Assets.xcassets */; };
@@ -32,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C9B361B2AF3F6C0003FEE75 /* AppTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTest.swift; sourceTree = "<group>"; };
 		4CCE59712AF19AE10094A85C /* StandupDetailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupDetailTests.swift; sourceTree = "<group>"; };
 		4CE483852AF020430078C342 /* StandupDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupDetail.swift; sourceTree = "<group>"; };
 		654A03E82AD9A7800053C415 /* StandupsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupsList.swift; sourceTree = "<group>"; };
@@ -39,6 +42,7 @@
 		654A03EC2AD9AE980053C415 /* StandupForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupForm.swift; sourceTree = "<group>"; };
 		654A03EE2ADAFEF20053C415 /* StandupFormTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupFormTests.swift; sourceTree = "<group>"; };
 		654A03F02ADB03D50053C415 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		656445DA2AF1A5380072CF7C /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		65A5B63B2AEED2240064DBE1 /* StandupsListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupsListTests.swift; sourceTree = "<group>"; };
 		65D7AC9E2AD9A4A400B2AC9D /* StandupsTCA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StandupsTCA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D7ACA12AD9A4A400B2AC9D /* StandupsTCAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupsTCAApp.swift; sourceTree = "<group>"; };
@@ -90,13 +94,14 @@
 		65D7ACA02AD9A4A400B2AC9D /* StandupsTCA */ = {
 			isa = PBXGroup;
 			children = (
+				65D7ACA12AD9A4A400B2AC9D /* StandupsTCAApp.swift */,
+				656445DA2AF1A5380072CF7C /* App.swift */,
 				654A03E82AD9A7800053C415 /* StandupsList.swift */,
 				654A03EC2AD9AE980053C415 /* StandupForm.swift */,
-				65D7ACA12AD9A4A400B2AC9D /* StandupsTCAApp.swift */,
+				4CE483852AF020430078C342 /* StandupDetail.swift */,
 				654A03EA2AD9A8B20053C415 /* Models.swift */,
 				65D7ACA52AD9A4A500B2AC9D /* Assets.xcassets */,
 				65D7ACA72AD9A4A500B2AC9D /* Preview Content */,
-				4CE483852AF020430078C342 /* StandupDetail.swift */,
 			);
 			path = StandupsTCA;
 			sourceTree = "<group>";
@@ -115,6 +120,7 @@
 				4CCE59712AF19AE10094A85C /* StandupDetailTests.swift */,
 				654A03EE2ADAFEF20053C415 /* StandupFormTests.swift */,
 				65A5B63B2AEED2240064DBE1 /* StandupsListTests.swift */,
+				4C9B361B2AF3F6C0003FEE75 /* AppTest.swift */,
 			);
 			path = StandupsTCATests;
 			sourceTree = "<group>";
@@ -228,6 +234,7 @@
 			files = (
 				654A03EB2AD9A8B20053C415 /* Models.swift in Sources */,
 				654A03E92AD9A7800053C415 /* StandupsList.swift in Sources */,
+				656445DB2AF1A5380072CF7C /* App.swift in Sources */,
 				65D7ACA22AD9A4A400B2AC9D /* StandupsTCAApp.swift in Sources */,
 				654A03ED2AD9AE980053C415 /* StandupForm.swift in Sources */,
 				4CE483862AF020430078C342 /* StandupDetail.swift in Sources */,
@@ -239,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				654A03EF2ADAFEF20053C415 /* StandupFormTests.swift in Sources */,
+				4C9B361C2AF3F6C0003FEE75 /* AppTest.swift in Sources */,
 				65A5B63C2AEED2240064DBE1 /* StandupsListTests.swift in Sources */,
 				4CCE59722AF19AE10094A85C /* StandupDetailTests.swift in Sources */,
 			);

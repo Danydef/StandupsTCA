@@ -6,3 +6,5 @@
 
 * Tercer commit añadimos la pantalla de detalle del Standup, donde podemos includo editarlo, se ha realizado algún tests no exaustivo, pero podemos mejorarlo, para la proxima navegaremos desde la pantalla principal hasta el detalle.
 
+* Cuarto commit, en esta ocasión añadimos varias cosas nuevas entre otras cosas, dos structs nuevas que actuan como concentrador de nuestras vistas, `AppFeature` `AppView`, también se ha añadido la capacidad de que dominios secundarios o hijos puedan comunicarse con su dominio principal o padre. Lógicamente y como siempre se han añadido algunos test.
+

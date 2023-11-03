@@ -13,7 +13,7 @@ struct StandupsListFeature: Reducer {
         @PresentationState var addStandup: StandupFormFeature.State?
         var standups: IdentifiedArrayOf<Standup> = []
     }
-    enum Action {
+    enum Action: Equatable {
         case addButtonTapped
         case addStandup(PresentationAction<StandupFormFeature.Action>)
         case cancelStandupButtonTapped
@@ -59,8 +59,14 @@ struct StandupsListView: View {
         WithViewStore(store, observe: \.standups) { viewStore in
             List {
                 ForEach(viewStore.state) { standup in
-                    CardView(standup: standup)
-                        .listRowBackground(standup.theme.mainColor)
+                    NavigationLink(
+                        state: AppFeature.Path.State.detail(
+                            StandupDetailFeature.State(standup: standup)
+                        )
+                    ) {
+                        CardView(standup: standup)
+                    }
+                    .listRowBackground(standup.theme.mainColor)
                 }
             }
             .navigationTitle("Daily Standups")
