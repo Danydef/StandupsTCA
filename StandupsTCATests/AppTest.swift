@@ -43,9 +43,7 @@ final class AppTest: XCTestCase {
             )
         ) {
             $0.path[id: 0, case: /AppFeature.Path.State.detail]?
-                .editStandup = StandupFormFeature.State(
-                    standup: standup
-                )
+                .destination = .editStandup(StandupFormFeature.State(standup: standup))
         }
         
         var editedStandup = standup
@@ -56,15 +54,13 @@ final class AppTest: XCTestCase {
                 .element(
                     id: 0,
                     action: .detail(
-                        .editStandup(
-                            .presented(.set(\.$standup, editedStandup))
-                        )
+                        .destination(.presented(.editStandup(.set(\.$standup, editedStandup))))
                     )
                 )
             )
         ) {
             $0.path[id: 0, case: /AppFeature.Path.State.detail]?
-                .editStandup?.standup.title = title
+                .$destination[case: /StandupDetailFeature.Destination.State.editStandup]?.standup.title = title
         }
         
         await store.send(
@@ -73,7 +69,7 @@ final class AppTest: XCTestCase {
             )
         ) {
             $0.path[id: 0, case: /AppFeature.Path.State.detail]?
-                .editStandup = nil
+                .destination = nil
             $0.path[id: 0, case: /AppFeature.Path.State.detail]?
                 .standup.title = title
         }
@@ -122,9 +118,10 @@ final class AppTest: XCTestCase {
         let title = "Talento Morning Sync"
         var editedStandup = standup
         editedStandup.title = title
+        
         await store.send(
             .path(
-                .element(id: 0, action: .detail(.editStandup(.presented(.set(\.$standup, editedStandup)))))
+                .element(id: 0, action: .detail(.destination(.presented(.editStandup(.set(\.$standup, editedStandup))))))
             )
         )
         await store.send(
@@ -135,6 +132,202 @@ final class AppTest: XCTestCase {
         await store.skipReceivedActions()
         store.assert {
             $0.standupsList.standups[0].title = title
+        }
+    }
+    
+    func testDelete_NonExhaustive() async {
+        let standup = Standup.mock
+        let store = TestStore(
+            initialState: AppFeature.State(
+                path: StackState([
+                    .detail(
+                        StandupDetailFeature.State(standup: standup)
+                    )
+                ]),
+                standupsList: StandupsListFeature.State(
+                    standups: [
+                        standup
+                    ]
+                )
+            )
+        ) {
+            AppFeature()
+        }
+        store.exhaustivity = .off
+        
+        await store.send(
+            .path(
+                .element(id: 0, action: .detail(.deleteButtonTapped))
+            )
+        )
+        
+        await store.send(
+            .path(
+                .element(
+                    id: 0,
+                    action: .detail(
+                        .destination(.presented(.alert(.confirmDeletion)))
+                    )
+                )
+            )
+        )
+        
+        await store.skipReceivedActions()
+        store.assert {
+            $0.path = StackState([])
+            $0.standupsList.standups = []
+        }
+    }
+    
+    func testTimerRunOutEndMeeting() async {
+        let standup = Standup(
+            id: UUID(),
+            attendees: [Attendee(id: UUID())],
+            duration: .seconds(1),
+            meetings: [],
+            theme: .bubblegum,
+            title: "Talento"
+        )
+        
+        let date = Date()
+        
+        let store = TestStore(
+            initialState: AppFeature.State(
+                path: StackState([
+                    .detail(
+                        StandupDetailFeature.State(standup: standup)
+                    ),
+                    .recordMeeting(
+                        RecordMeetingFeature.State(standup: standup)
+                    )
+                ]),
+                standupsList: StandupsListFeature.State(
+                    standups: [standup]
+                )
+            )
+        ) {
+            AppFeature()
+        } withDependencies: {
+            $0.continuousClock = ImmediateClock()
+            $0.date.now = date
+            $0.speechClient.requestAuthorization = { false }
+            $0.uuid = .incrementing
+        }
+        store.exhaustivity = .off
+        
+        await store.send(.path(.element(id: 1, action: .recordMeeting(.onTask))))
+        await store.receive(.path(.element(id: 1, action: .recordMeeting(.delegate(.saveMeeting(transcript: ""))))))
+        await store.receive(.path(.popFrom(id: 1)))
+        store.assert {
+            $0.path[id: 0, case: /AppFeature.Path.State.detail]?.standup.meetings = [
+                Meeting(
+                    id: UUID(0),
+                    date: date,
+                    transcript: ""
+                )
+            ]
+            XCTAssertEqual($0.path.count, 1)
+        }
+    }
+    
+    func testTimerRunOutEndMeeting_WithSpeechRecognizer() async {
+        let standup = Standup(
+            id: UUID(),
+            attendees: [Attendee(id: UUID())],
+            duration: .seconds(1),
+            meetings: [],
+            theme: .bubblegum,
+            title: "Talento"
+        )
+        
+        let date = Date()
+        let transcript = "This was a really good meeting!"
+        
+        let store = TestStore(
+            initialState: AppFeature.State(
+                path: StackState([
+                    .detail(
+                        StandupDetailFeature.State(standup: standup)
+                    ),
+                    .recordMeeting(
+                        RecordMeetingFeature.State(standup: standup)
+                    )
+                ]),
+                standupsList: StandupsListFeature.State(
+                    standups: [standup]
+                )
+            )
+        ) {
+            AppFeature()
+        } withDependencies: {
+            $0.continuousClock = ImmediateClock()
+            $0.date.now = date
+            $0.speechClient.requestAuthorization = { true }
+            $0.speechClient.start = {
+                AsyncThrowingStream { $0.yield(transcript) }
+            }
+            $0.uuid = .incrementing
+        }
+        store.exhaustivity = .off
+        
+        await store.send(.path(.element(id: 1, action: .recordMeeting(.onTask))))
+        await store.receive(.path(.element(id: 1, action: .recordMeeting(.delegate(.saveMeeting(transcript: transcript))))))
+        await store.receive(.path(.popFrom(id: 1)))
+        store.assert {
+            $0.path[id: 0, case: /AppFeature.Path.State.detail]?.standup.meetings = [
+                Meeting(
+                    id: UUID(0),
+                    date: date,
+                    transcript: transcript
+                )
+            ]
+            XCTAssertEqual($0.path.count, 1)
+        }
+    }
+
+    
+    func testEndMeetingEarlyDicard() async {
+        let standup = Standup(
+            id: UUID(),
+            attendees: [Attendee(id: UUID())],
+            duration: .seconds(1),
+            meetings: [],
+            theme: .bubblegum,
+            title: "Talento"
+        )
+        
+        let date = Date()
+        
+        let store = TestStore(
+            initialState: AppFeature.State(
+                path: StackState([
+                    .detail(
+                        StandupDetailFeature.State(standup: standup)
+                    ),
+                    .recordMeeting(
+                        RecordMeetingFeature.State(standup: standup)
+                    )
+                ]),
+                standupsList: StandupsListFeature.State(
+                    standups: [standup]
+                )
+            )
+        ) {
+            AppFeature()
+        } withDependencies: {
+            $0.continuousClock = ImmediateClock()
+            $0.speechClient.requestAuthorization = { false }
+        }
+        store.exhaustivity = .off
+        
+        await store.send(.path(.element(id: 1, action: .recordMeeting(.onTask))))
+        await store.send(.path(.element(id: 1, action: .recordMeeting(.endMeetingButtonTapped))))
+        await store.send(.path(.element(id: 1, action: .recordMeeting(.alert(.presented(.confirmDiscard))))))
+        await store.skipReceivedActions()
+        
+        store.assert {
+            $0.path[id: 0, case: /AppFeature.Path.State.detail]?.standup.meetings = []
+            XCTAssertEqual($0.path.count, 1)
         }
     }
 }

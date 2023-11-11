@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C5473EB2AF9083E0022E1D6 /* SpeechClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5473EA2AF9083E0022E1D6 /* SpeechClient.swift */; };
 		4C9B361C2AF3F6C0003FEE75 /* AppTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B361B2AF3F6C0003FEE75 /* AppTest.swift */; };
 		4CCE59722AF19AE10094A85C /* StandupDetailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE59712AF19AE10094A85C /* StandupDetailTests.swift */; };
 		4CE483862AF020430078C342 /* StandupDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE483852AF020430078C342 /* StandupDetail.swift */; };
@@ -17,7 +18,9 @@
 		654A03EF2ADAFEF20053C415 /* StandupFormTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654A03EE2ADAFEF20053C415 /* StandupFormTests.swift */; };
 		654A03F12ADB03D50053C415 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 654A03F02ADB03D50053C415 /* README.md */; };
 		656445DB2AF1A5380072CF7C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656445DA2AF1A5380072CF7C /* App.swift */; };
+		657A1EE92AFD0F89002B46D1 /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657A1EE82AFD0F89002B46D1 /* Meeting.swift */; };
 		65A5B63C2AEED2240064DBE1 /* StandupsListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A5B63B2AEED2240064DBE1 /* StandupsListTests.swift */; };
+		65CC453A2AF6D287004F8E2F /* RecordMeeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CC45392AF6D287004F8E2F /* RecordMeeting.swift */; };
 		65D7ACA22AD9A4A400B2AC9D /* StandupsTCAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D7ACA12AD9A4A400B2AC9D /* StandupsTCAApp.swift */; };
 		65D7ACA62AD9A4A500B2AC9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D7ACA52AD9A4A500B2AC9D /* Assets.xcassets */; };
 		65D7ACA92AD9A4A500B2AC9D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D7ACA82AD9A4A500B2AC9D /* Preview Assets.xcassets */; };
@@ -34,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C5473EA2AF9083E0022E1D6 /* SpeechClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechClient.swift; sourceTree = "<group>"; };
 		4C9B361B2AF3F6C0003FEE75 /* AppTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTest.swift; sourceTree = "<group>"; };
 		4CCE59712AF19AE10094A85C /* StandupDetailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupDetailTests.swift; sourceTree = "<group>"; };
 		4CE483852AF020430078C342 /* StandupDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupDetail.swift; sourceTree = "<group>"; };
@@ -43,7 +47,9 @@
 		654A03EE2ADAFEF20053C415 /* StandupFormTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupFormTests.swift; sourceTree = "<group>"; };
 		654A03F02ADB03D50053C415 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		656445DA2AF1A5380072CF7C /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		657A1EE82AFD0F89002B46D1 /* Meeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
 		65A5B63B2AEED2240064DBE1 /* StandupsListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupsListTests.swift; sourceTree = "<group>"; };
+		65CC45392AF6D287004F8E2F /* RecordMeeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMeeting.swift; sourceTree = "<group>"; };
 		65D7AC9E2AD9A4A400B2AC9D /* StandupsTCA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StandupsTCA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D7ACA12AD9A4A400B2AC9D /* StandupsTCAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupsTCAApp.swift; sourceTree = "<group>"; };
 		65D7ACA52AD9A4A500B2AC9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -99,6 +105,9 @@
 				654A03E82AD9A7800053C415 /* StandupsList.swift */,
 				654A03EC2AD9AE980053C415 /* StandupForm.swift */,
 				4CE483852AF020430078C342 /* StandupDetail.swift */,
+				65CC45392AF6D287004F8E2F /* RecordMeeting.swift */,
+				4C5473EA2AF9083E0022E1D6 /* SpeechClient.swift */,
+				657A1EE82AFD0F89002B46D1 /* Meeting.swift */,
 				654A03EA2AD9A8B20053C415 /* Models.swift */,
 				65D7ACA52AD9A4A500B2AC9D /* Assets.xcassets */,
 				65D7ACA72AD9A4A500B2AC9D /* Preview Content */,
@@ -236,6 +245,9 @@
 				654A03E92AD9A7800053C415 /* StandupsList.swift in Sources */,
 				656445DB2AF1A5380072CF7C /* App.swift in Sources */,
 				65D7ACA22AD9A4A400B2AC9D /* StandupsTCAApp.swift in Sources */,
+				657A1EE92AFD0F89002B46D1 /* Meeting.swift in Sources */,
+				4C5473EB2AF9083E0022E1D6 /* SpeechClient.swift in Sources */,
+				65CC453A2AF6D287004F8E2F /* RecordMeeting.swift in Sources */,
 				654A03ED2AD9AE980053C415 /* StandupForm.swift in Sources */,
 				4CE483862AF020430078C342 /* StandupDetail.swift in Sources */,
 			);
@@ -393,6 +405,8 @@
 				DEVELOPMENT_TEAM = 32W6MR4P46;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "You can view a text transcription of your meeting in the app.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -424,6 +438,8 @@
 				DEVELOPMENT_TEAM = 32W6MR4P46;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "You can view a text transcription of your meeting in the app.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
