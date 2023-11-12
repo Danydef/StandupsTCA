@@ -2,7 +2,7 @@
 
 
 
-
+* Sexto y último commit, en este commit hemos añadido la persistencia, y lo hemos hecho de forma tal que no sea una dependencia que nos controle sino que sea una dependencia controlada por nosotros, esto nos permite previsualizar y hacer test de forma sencilla.
 
 * Quinto commit, ya casi estamos al final del desarrollo de la app, en este commit hemos incorporado la capacided de transcripción, para lo cual se a actualizado el struct `SpeechClient` para que haga de intermediario entre nuestro feature, `RecordMeetingFeature` y el Framework de Apple Speech, y gracias a la gestión de dependencias, podemos ofrecer un mock a la vista previa y la verdadera funcionalidad cuanto ejecutemos en un Simumador o dispositivo físico. También se ha incluido algún test más.
 

@@ -16,10 +16,14 @@ final class AppTest: XCTestCase {
         
         let store = TestStore(
             initialState: AppFeature.State(
-                standupsList: StandupsListFeature.State(standups: [standup])
+                standupsList: StandupsListFeature.State(
+                )
             )
         ) {
             AppFeature()
+        } withDependencies: {
+            $0.continuousClock = ImmediateClock()
+            $0.dataManager = .mock(initialData: try? JSONEncoder().encode([standup]))
         }
         
         await store.send(
@@ -91,12 +95,13 @@ final class AppTest: XCTestCase {
         
         let store = TestStore(
             initialState: AppFeature.State(
-                standupsList: StandupsListFeature.State(
-                    standups: [standup]
-                )
+                standupsList: StandupsListFeature.State()
             )
         ) {
             AppFeature()
+        } withDependencies: {
+            $0.continuousClock = ImmediateClock()
+            $0.dataManager = .mock(initialData: try? JSONEncoder().encode([standup]))
         }
         store.exhaustivity = .off
         
@@ -144,15 +149,15 @@ final class AppTest: XCTestCase {
                         StandupDetailFeature.State(standup: standup)
                     )
                 ]),
-                standupsList: StandupsListFeature.State(
-                    standups: [
-                        standup
-                    ]
-                )
+                standupsList: StandupsListFeature.State()
             )
         ) {
             AppFeature()
+        } withDependencies: {
+            $0.continuousClock = ImmediateClock()
+            $0.dataManager = .mock(initialData: try? JSONEncoder().encode([standup]))
         }
+        
         store.exhaustivity = .off
         
         await store.send(
@@ -201,9 +206,7 @@ final class AppTest: XCTestCase {
                         RecordMeetingFeature.State(standup: standup)
                     )
                 ]),
-                standupsList: StandupsListFeature.State(
-                    standups: [standup]
-                )
+                standupsList: StandupsListFeature.State()
             )
         ) {
             AppFeature()
@@ -212,6 +215,7 @@ final class AppTest: XCTestCase {
             $0.date.now = date
             $0.speechClient.requestAuthorization = { false }
             $0.uuid = .incrementing
+            $0.dataManager = .mock(initialData: try? JSONEncoder().encode([standup]))
         }
         store.exhaustivity = .off
         
@@ -253,9 +257,7 @@ final class AppTest: XCTestCase {
                         RecordMeetingFeature.State(standup: standup)
                     )
                 ]),
-                standupsList: StandupsListFeature.State(
-                    standups: [standup]
-                )
+                standupsList: StandupsListFeature.State()
             )
         ) {
             AppFeature()
@@ -267,6 +269,7 @@ final class AppTest: XCTestCase {
                 AsyncThrowingStream { $0.yield(transcript) }
             }
             $0.uuid = .incrementing
+            $0.dataManager = .mock(initialData: try? JSONEncoder().encode([standup]))
         }
         store.exhaustivity = .off
         
@@ -295,9 +298,7 @@ final class AppTest: XCTestCase {
             theme: .bubblegum,
             title: "Talento"
         )
-        
-        let date = Date()
-        
+                
         let store = TestStore(
             initialState: AppFeature.State(
                 path: StackState([
@@ -308,15 +309,14 @@ final class AppTest: XCTestCase {
                         RecordMeetingFeature.State(standup: standup)
                     )
                 ]),
-                standupsList: StandupsListFeature.State(
-                    standups: [standup]
-                )
+                standupsList: StandupsListFeature.State()
             )
         ) {
             AppFeature()
         } withDependencies: {
             $0.continuousClock = ImmediateClock()
             $0.speechClient.requestAuthorization = { false }
+            $0.dataManager = .mock(initialData: try? JSONEncoder().encode([standup]))
         }
         store.exhaustivity = .off
         
@@ -328,6 +328,32 @@ final class AppTest: XCTestCase {
         store.assert {
             $0.path[id: 0, case: /AppFeature.Path.State.detail]?.standup.meetings = []
             XCTAssertEqual($0.path.count, 1)
+        }
+    }
+    
+    func testAdd() async {
+        let store = TestStore(
+            initialState: AppFeature.State(
+                standupsList: StandupsListFeature.State()
+            )
+        ) {
+            AppFeature()
+        } withDependencies: {
+            $0.uuid = .incrementing
+            $0.continuousClock = ImmediateClock()
+            $0.dataManager = .mock()
+        }
+        store.exhaustivity = .off
+        
+        await store.send(.standupsList(.addButtonTapped))
+        await store.send(.standupsList(.saveStandupButtonTapped))
+        store.assert {
+            $0.standupsList.standups = [
+                Standup(
+                    id: UUID(0),
+                    attendees: [Attendee(id: UUID(1))]
+                )
+            ]
         }
     }
 }

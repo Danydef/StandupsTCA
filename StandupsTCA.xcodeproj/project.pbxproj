@@ -19,6 +19,7 @@
 		654A03F12ADB03D50053C415 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 654A03F02ADB03D50053C415 /* README.md */; };
 		656445DB2AF1A5380072CF7C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656445DA2AF1A5380072CF7C /* App.swift */; };
 		657A1EE92AFD0F89002B46D1 /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657A1EE82AFD0F89002B46D1 /* Meeting.swift */; };
+		65A3A8432AFFD8B00092E8FC /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A3A8422AFFD8B00092E8FC /* DataManager.swift */; };
 		65A5B63C2AEED2240064DBE1 /* StandupsListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A5B63B2AEED2240064DBE1 /* StandupsListTests.swift */; };
 		65CC453A2AF6D287004F8E2F /* RecordMeeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CC45392AF6D287004F8E2F /* RecordMeeting.swift */; };
 		65D7ACA22AD9A4A400B2AC9D /* StandupsTCAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D7ACA12AD9A4A400B2AC9D /* StandupsTCAApp.swift */; };
@@ -48,6 +49,7 @@
 		654A03F02ADB03D50053C415 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		656445DA2AF1A5380072CF7C /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		657A1EE82AFD0F89002B46D1 /* Meeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
+		65A3A8422AFFD8B00092E8FC /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		65A5B63B2AEED2240064DBE1 /* StandupsListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupsListTests.swift; sourceTree = "<group>"; };
 		65CC45392AF6D287004F8E2F /* RecordMeeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMeeting.swift; sourceTree = "<group>"; };
 		65D7AC9E2AD9A4A400B2AC9D /* StandupsTCA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StandupsTCA.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,6 +109,7 @@
 				4CE483852AF020430078C342 /* StandupDetail.swift */,
 				65CC45392AF6D287004F8E2F /* RecordMeeting.swift */,
 				4C5473EA2AF9083E0022E1D6 /* SpeechClient.swift */,
+				65A3A8422AFFD8B00092E8FC /* DataManager.swift */,
 				657A1EE82AFD0F89002B46D1 /* Meeting.swift */,
 				654A03EA2AD9A8B20053C415 /* Models.swift */,
 				65D7ACA52AD9A4A500B2AC9D /* Assets.xcassets */,
@@ -242,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				654A03EB2AD9A8B20053C415 /* Models.swift in Sources */,
+				65A3A8432AFFD8B00092E8FC /* DataManager.swift in Sources */,
 				654A03E92AD9A7800053C415 /* StandupsList.swift in Sources */,
 				656445DB2AF1A5380072CF7C /* App.swift in Sources */,
 				65D7ACA22AD9A4A400B2AC9D /* StandupsTCAApp.swift in Sources */,

@@ -19,6 +19,7 @@ final class StandupsListTests: XCTestCase {
             StandupsListFeature()
         } withDependencies: {
             $0.uuid = .incrementing
+            $0.dataManager = .mock()
         }
         
         var standup = Standup(
@@ -39,7 +40,7 @@ final class StandupsListTests: XCTestCase {
             $0.addStandup?.standup.title = title
         }
         
-        await store.send(.saveStandudButtonTapped) {
+        await store.send(.saveStandupButtonTapped) {
             $0.addStandup = nil
             $0.standups[0] = Standup(
                 id: UUID(0),
@@ -56,6 +57,7 @@ final class StandupsListTests: XCTestCase {
         ) {
             StandupsListFeature()
         } withDependencies: {
+            $0.dataManager = .mock()
             $0.uuid = .incrementing
         }
         store.exhaustivity = .off(showSkippedAssertions: true)
@@ -72,7 +74,7 @@ final class StandupsListTests: XCTestCase {
             .addStandup(.presented(.set(\.$standup, standup)))
         )
         
-        await store.send(.saveStandudButtonTapped) {
+        await store.send(.saveStandupButtonTapped) {
             $0.standups[0] = Standup(
                 id: UUID(0),
                 attendees: [Attendee(id: UUID(1))],

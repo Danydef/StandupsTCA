@@ -12,12 +12,24 @@ struct StandupsListFeature: Reducer {
     struct State: Equatable {
         @PresentationState var addStandup: StandupFormFeature.State?
         var standups: IdentifiedArrayOf<Standup> = []
+        
+        init(addStandup: StandupFormFeature.State? = nil) {
+            self.addStandup = addStandup
+            do {
+                @Dependency(\.dataManager.load) var loadData
+                standups = try 
+                    JSONDecoder().decode(IdentifiedArrayOf<Standup>.self,
+                    from: loadData(.standups))
+            } catch {
+                standups = []
+            }
+        }
     }
     enum Action: Equatable {
         case addButtonTapped
         case addStandup(PresentationAction<StandupFormFeature.Action>)
         case cancelStandupButtonTapped
-        case saveStandudButtonTapped
+        case saveStandupButtonTapped
     }
     
     @Dependency(\.uuid) var uuid
@@ -38,7 +50,7 @@ struct StandupsListFeature: Reducer {
                 state.addStandup = nil
                 return .none
                 
-            case .saveStandudButtonTapped:
+            case .saveStandupButtonTapped:
                 guard let standud = state.addStandup?.standup else { return .none }
                 state.standups.append(standud)
                 state.addStandup = nil
@@ -89,7 +101,7 @@ struct StandupsListView: View {
                         .toolbar {
                             ToolbarItem {
                                 Button("Save") {
-                                    viewStore.send(.saveStandudButtonTapped)
+                                    viewStore.send(.saveStandupButtonTapped)
                                 }
                             }
                             ToolbarItem(placement: .cancellationAction) {
@@ -145,7 +157,7 @@ extension LabelStyle where Self == TrailingIconLabelStyle {
         StandupsListView(
             store: Store(
                 initialState: StandupsListFeature.State(
-                    standups: [.mock]
+//                    standups: [.mock]
                 )
             ) {
                     StandupsListFeature()

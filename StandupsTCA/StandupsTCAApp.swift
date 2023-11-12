@@ -22,7 +22,7 @@ struct StandupsTCAApp: App {
 //                            .recordMeeting(RecordMeetingFeature.State())
                         ]),
                         standupsList: StandupsListFeature.State(
-                            standups: [standup]
+//                            standups: [standup]
                         )
                     )
                 ) {
