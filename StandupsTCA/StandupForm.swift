@@ -135,14 +135,12 @@ struct ThemePicker: View {
   }
 }
 
-//#Preview {
-//  MainActor.assumeIsolated {
-//    NavigationStack {
-//      StandupFormView(
-//        store: Store(initialState: StandupFormFeature.State(standup: .mock)) {
-//            StandupFormFeature()
-//        }
-//      )
-//    }
-//  }
-//}
+#Preview {
+    NavigationStack {
+      StandupFormView(
+        store: Store(initialState: StandupFormFeature.State(standup: .mock)) {
+            StandupFormFeature()
+        }
+      )
+    }
+}
