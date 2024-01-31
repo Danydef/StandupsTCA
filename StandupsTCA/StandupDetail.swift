@@ -8,10 +8,17 @@
 import ComposableArchitecture
 import SwiftUI
 
-struct StandupDetailFeature: Reducer {
+@Reducer
+struct StandupDetailFeature {
+    @ObservableState
     struct State: Equatable {
-        @PresentationState var destination: Destination.State?
+        @Presents var destination: Destination.State?
         var standup: Standup
+        
+        init(destination: Destination.State? = nil, standup: Standup) {
+            self.destination = destination
+            self.standup = standup
+        }
     }
     
     enum Action: Equatable {
@@ -125,12 +132,12 @@ struct StandupDetailView: View {
     let store: StoreOf<StandupDetailFeature>
     
     var body: some View {
-        WithViewStore(store, observe: { $0 }) { viewStore in
+        WithPerceptionTracking {
             List {
                 Section {
                     NavigationLink(
                         state: AppFeature.Path.State.recordMeeting(
-                            RecordMeetingFeature.State(standup: viewStore.standup)
+                            RecordMeetingFeature.State(standup: store.standup)
                         )
                     ) {
                         Label("Start Meeting", systemImage: "timer")
@@ -140,16 +147,16 @@ struct StandupDetailView: View {
                     HStack {
                         Label("Length", systemImage: "clock")
                         Spacer()
-                        Text(viewStore.standup.duration.formatted(.units()))
+                        Text(store.standup.duration.formatted(.units()))
                     }
                     
                     HStack {
                         Label("Theme", systemImage: "paintpalete")
                         Spacer()
-                        Text(viewStore.standup.theme.name)
+                        Text(store.standup.theme.name)
                             .padding(4)
-                            .foregroundColor(viewStore.standup.theme.accentColor)
-                            .background(viewStore.standup.theme.mainColor)
+                            .foregroundColor(store.standup.theme.accentColor)
+                            .background(store.standup.theme.mainColor)
                             .cornerRadius(4)
                         
                     }
@@ -157,13 +164,13 @@ struct StandupDetailView: View {
                     Text("Standup Info")
                 }
                 
-                if !viewStore.standup.meetings.isEmpty {
+                if !store.standup.meetings.isEmpty {
                     Section {
-                        ForEach(viewStore.standup.meetings) { meeting in
+                        ForEach(store.standup.meetings) { meeting in
                             NavigationLink(
                                 state: AppFeature.Path.State.meeting(
                                     meeting,
-                                    standup: viewStore.standup
+                                    standup: store.standup
                                 )
                             ) {
                                 HStack {
@@ -174,7 +181,7 @@ struct StandupDetailView: View {
                             }
                         }
                         .onDelete{ indices in
-                            viewStore.send(.deleteMeetings(atOffsets: indices))
+                            store.send(.deleteMeetings(atOffsets: indices))
                         }
                     } header: {
                         Text("Past mettings")
@@ -182,7 +189,7 @@ struct StandupDetailView: View {
                 }
                 
                 Section {
-                    ForEach(viewStore.standup.attendees) { attendee in
+                    ForEach(store.standup.attendees) { attendee in
                         Label(attendee.name, systemImage: "person")
                     }
                 } header: {
@@ -191,25 +198,25 @@ struct StandupDetailView: View {
                 
                 Section {
                     Button("Delete") {
-                        viewStore.send(.deleteButtonTapped)
+                        store.send(.deleteButtonTapped)
                     }
                     .foregroundColor(.red)
                     .frame(maxWidth: .infinity)
                 }
             }
-            .navigationTitle(viewStore.standup.title)
+            .navigationTitle(store.standup.title)
             .toolbar {
                 Button("Edit") {
-                    viewStore.send(.editButtonTapped)
+                    store.send(.editButtonTapped)
                 }
             }
             .alert(
-                store: store.scope(state: \.$destination, action: { .destination($0) }),
+                store: store.scope(state: \.$destination, action: \.destination),
                 state: /StandupDetailFeature.Destination.State.alert,
                 action: StandupDetailFeature.Destination.Action.alert
             )
             .sheet(
-                store: store.scope(state: \.$destination, action: { .destination($0) }),
+                store: store.scope(state: \.$destination, action: \.destination),
                 state: /StandupDetailFeature.Destination.State.editStandup,
                 action: StandupDetailFeature.Destination.Action.editStandup
             ) { store in
@@ -219,12 +226,12 @@ struct StandupDetailView: View {
                         .toolbar {
                             ToolbarItem {
                                 Button("Save") {
-                                    viewStore.send(.saveStandupButtonTapped)
+                                    self.store.send(.saveStandupButtonTapped)
                                 }
                             }
                             ToolbarItem(placement: .cancellationAction) {
                                 Button("Cancel") {
-                                    viewStore.send(.cancelEditStandupButtonTapped)
+                                    self.store.send(.cancelEditStandupButtonTapped)
                                 }
                             }
                         }

@@ -8,9 +8,11 @@
 import ComposableArchitecture
 import SwiftUI
 
-struct StandupsListFeature: Reducer {
+@Reducer
+struct StandupsListFeature {
+    @ObservableState
     struct State: Equatable {
-        @PresentationState var addStandup: StandupFormFeature.State?
+        @Presents var addStandup: StandupFormFeature.State?
         var standups: IdentifiedArrayOf<Standup> = []
         
         init(addStandup: StandupFormFeature.State? = nil) {
@@ -39,10 +41,6 @@ struct StandupsListFeature: Reducer {
             case .addButtonTapped:
                 state.addStandup = StandupFormFeature.State(standup: Standup(id: uuid()))
                 return .none
-//            case let .addStandup(.presented(.addAttendeeButtonTapped))):
-//                Do something
-//                return .none
-            
             case .addStandup:
                 return .none
                 
@@ -68,9 +66,9 @@ struct StandupsListView: View {
     let store: StoreOf<StandupsListFeature>
     
     var body: some View {
-        WithViewStore(store, observe: \.standups) { viewStore in
+        WithPerceptionTracking {
             List {
-                ForEach(viewStore.state) { standup in
+                ForEach(store.standups) { standup in
                     NavigationLink(
                         state: AppFeature.Path.State.detail(
                             StandupDetailFeature.State(standup: standup)
@@ -85,14 +83,14 @@ struct StandupsListView: View {
             .toolbar {
                 ToolbarItem {
                     Button("Add") {
-                        viewStore.send(.addButtonTapped)
+                        store.send(.addButtonTapped)
                     }
                 }
             }
             .sheet(
                 store: store.scope(
                     state: \.$addStandup,
-                    action: { .addStandup($0) }
+                    action: \.addStandup
                 )
             ) { store in
                 NavigationStack {
@@ -101,12 +99,12 @@ struct StandupsListView: View {
                         .toolbar {
                             ToolbarItem {
                                 Button("Save") {
-                                    viewStore.send(.saveStandupButtonTapped)
+                                    self.store.send(.saveStandupButtonTapped)
                                 }
                             }
                             ToolbarItem(placement: .cancellationAction) {
                                 Button("Cancel") {
-                                    viewStore.send(.cancelStandupButtonTapped)
+                                    self.store.send(.cancelStandupButtonTapped)
                                 }
                             }
                         }
