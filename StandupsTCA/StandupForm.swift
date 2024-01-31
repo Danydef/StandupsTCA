@@ -8,10 +8,12 @@
 import ComposableArchitecture
 import SwiftUI
 
-struct StandupFormFeature: Reducer {
+@Reducer
+struct StandupFormFeature {
+    @ObservableState
     struct State: Equatable {
-        @BindingState var focus: Field?
-        @BindingState var standup: Standup
+        var focus: Field?
+        var standup: Standup
         
         enum Field: Hashable {
             case attendee(Attendee.ID)
@@ -67,49 +69,49 @@ struct StandupFormFeature: Reducer {
 }
 
 struct StandupFormView: View {
-    let store: StoreOf<StandupFormFeature>
+    @BindableStore var store: StoreOf<StandupFormFeature>
     @FocusState var focus: StandupFormFeature.State.Field?
     
     var body: some View {
-        WithViewStore(store, observe: { $0 }) { viewStore in
+        WithPerceptionTracking {
             Form {
                 Section {
-                    TextField("Title", text: viewStore.$standup.title)
-                        .focused(self.$focus, equals: .title)
+                    TextField("Title", text: $store.standup.title)
+                        .focused($focus, equals: .title)
                     HStack {
-                        Slider(value: viewStore.$standup.duration.minutes, in: 5...30, step: 1) {
+                        Slider(value: $store.standup.duration.minutes, in: 5...30, step: 1) {
                             Text("Length")
                         }
                         Spacer()
-                        Text(viewStore.standup.duration.formatted(.units()))
+                        Text(store.standup.duration.formatted(.units()))
                     }
-                    ThemePicker(selection: viewStore.$standup.theme)
+                    ThemePicker(selection: $store.standup.theme)
                 } header: {
                     Text("Standup Info")
                 }
                 Section {
-                    ForEach(viewStore.$standup.attendees) { $attendee in
+                    ForEach($store.standup.attendees) { $attendee in
                         TextField("Name", text: $attendee.name)
                             .focused(self.$focus, equals: .attendee(attendee.id))
                     }
                     .onDelete { indices in
-                        viewStore.send(.deleteAttendees(atOffsets: indices))
+                        store.send(.deleteAttendees(atOffsets: indices))
                     }
                     
                     Button("Add attendee") {
-                        viewStore.send(.addAttendeeButtonTapped)
+                        store.send(.addAttendeeButtonTapped)
                     }
                 } header: {
                     Text("Attendees")
                 }
             }
-            .bind(viewStore.$focus, to: self.$focus)
+            .bind($store.focus, to: $focus)
         }
     }
 }
 
 extension Duration {
-    fileprivate var minutes: Double {
+    var minutes: Double {
         get { Double(components.seconds / 60) }
         set { self = .seconds(newValue * 60) }
     }

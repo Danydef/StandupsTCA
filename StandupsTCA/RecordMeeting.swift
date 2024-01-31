@@ -9,9 +9,11 @@ import ComposableArchitecture
 import Speech
 import SwiftUI
 
-struct RecordMeetingFeature: Reducer {
+@Reducer
+struct RecordMeetingFeature {
+    @ObservableState
     struct State: Equatable {
-        @PresentationState var alert: AlertState<Action.Alert>?
+        @Presents var alert: AlertState<Action.Alert>?
         var secondsElapsed = 0
         var speakerIndex = 0
         let standup: Standup
@@ -157,51 +159,48 @@ struct RecordMeetingView: View {
     let store: StoreOf<RecordMeetingFeature>
     
     var body: some View {
-        WithViewStore(
-            store, 
-            observe: { $0 }
-        ) { viewStore in
+        WithPerceptionTracking {
             ZStack {
                 RoundedRectangle(cornerRadius: 16)
-                    .fill(viewStore.standup.theme.mainColor)
+                    .fill(store.standup.theme.mainColor)
                 
                 VStack {
                     MeetingHeaderView(
-                        secondsElapsed: viewStore.secondsElapsed,
-                        durationRemaining: viewStore.durationRemaining,
-                        theme: viewStore.standup.theme
+                        secondsElapsed: store.secondsElapsed,
+                        durationRemaining: store.durationRemaining,
+                        theme: store.standup.theme
                     )
                     MeetingTimerView(
-                        standup: viewStore.standup,
-                        speakerIndex: viewStore.speakerIndex
+                        standup: store.standup,
+                        speakerIndex: store.speakerIndex
                     )
                     MeetingFooterView(
-                        standup: viewStore.standup,
+                        standup: store.standup,
                         nextButtonTapped: {
-                            viewStore.send(.nextButtonTapped)
+                            store.send(.nextButtonTapped)
                         },
-                        speakerIndex: viewStore.speakerIndex
+                        speakerIndex: store.speakerIndex
                     )
                 }
             }
             .padding()
-            .foregroundColor(viewStore.standup.theme.accentColor)
+            .foregroundColor(store.standup.theme.accentColor)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("End meeting") {
-                        viewStore.send(.endMeetingButtonTapped)
+                        store.send(.endMeetingButtonTapped)
                     }
                 }
             }
             .navigationBarBackButtonHidden(true)
             .task {
-                await viewStore.send(.onTask).finish()
+                await store.send(.onTask).finish()
             }
             .alert(
                 store: store.scope(
                     state: \.$alert,
-                    action: { .alert($0) }
+                    action: \.alert
                 )
             )
         }
